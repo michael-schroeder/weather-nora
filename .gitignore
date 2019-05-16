@@ -1,2 +1,10 @@
 *.class
 *.log
+src/*/target/
+src/*/bin/
+src/*/project/
+*.cache
+*.classpath
+*.project
+*.settings
+*.DS_Store

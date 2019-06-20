@@ -12,4 +12,5 @@ libraryDependencies += "com.typesafe.akka" %% "akka-http" % "10.1.8"
 libraryDependencies += "com.typesafe.akka" %% "akka-stream" % "2.5.23"
 libraryDependencies += "com.typesafe.akka" %% "akka-http-core" % "10.1.8"
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.1.0-SNAP13" % Test
-
+libraryDependencies += "com.typesafe.akka" %% "akka-http-core" % "10.1.8"
+libraryDependencies +=  "org.scalaj" %% "scalaj-http" % "2.4.1"

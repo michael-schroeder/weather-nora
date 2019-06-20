@@ -13,6 +13,7 @@ import scala.io.Source.fromInputStream
 import scalaj.http._
 
 import spray.json._
+import spray.json.lenses.JsonLenses._
 import spray.json.DefaultJsonProtocol._
 
 
@@ -22,12 +23,21 @@ class Test {
     s.replaceAll("a", "b")
   }
 
-  def getWeather: HttpResponse[JsValue] = {
+  def getApi: HttpResponse[JsValue] = {
     val response: HttpResponse[JsValue] = Http("https://api.darksky.net/forecast/3e7a45712a2ab6d9870de14df945a833/42.3601,-71.0589").execute(parser = {inputStream =>
         JsonParser(fromInputStream(inputStream).mkString)
     })
     response
   }
+
+  def getWeather = {
+    val body = getApi.body
+    val currentTempQ = 'currently / 'apparentTemperature
+    val currentTemp = body.extract[Float](currentTempQ)
+    currentTemp
+  }
+
+
 
   //val responseFuture: Future[HttpResponse] = {
   //  Http().singleRequest(HttpRequest(uri = "https://akka.io"))
@@ -44,26 +54,6 @@ class Test {
         JsonParser(fromInputStream(inputStream).mkString)
     })
     println(response)
-
-
-
-
-  /*
-  val responseFuture: Future[HttpResponse] = {
-    Http().singleRequest(HttpRequest(uri = "https://api.darksky.net/forecase/3e7a45712a2ab6d9870de14df945a833/42.3601,-71.0589"))
-  }
-
-  responseFuture.onComplete {
-    case Success(res) =>  {
-      val HttpResponse(statusCodes, headers, entity, _) = res
-      println(entity)
-      entity.dataBytes.runFold(ByteString(""))(_ ++ _).foreach(body => println(body.utf8String))
-      //system.terminate
-    }
-    case Failure(e) => println(e)
-  }
-  */
-
 
   }
 

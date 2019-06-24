@@ -15,5 +15,6 @@ libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "3.1.0-SNAP13" % Test,
   "com.typesafe.akka" %% "akka-http-core" % "10.1.8",
   "org.scalaj" %% "scalaj-http" % "2.4.1",
-  "net.virtual-void" %%  "json-lenses" % "0.6.2"
+  "net.virtual-void" %%  "json-lenses" % "0.6.2",
+  "com.github.daddykotex" %% "courier" % "1.0.0"
   )

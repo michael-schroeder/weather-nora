@@ -24,18 +24,28 @@ class Test {
   }
 
   def getApi: HttpResponse[JsValue] = {
-    val response: HttpResponse[JsValue] = Http("https://api.darksky.net/forecast/3e7a45712a2ab6d9870de14df945a833/42.3601,-71.0589").execute(parser = {inputStream =>
+    val response: HttpResponse[JsValue] = Http("https://api.darksky.net/forecast/3e7a45712a2ab6d9870de14df945a833/42.3601,-71.0589?exclude=alerts,flags").execute(parser = {inputStream =>
         JsonParser(fromInputStream(inputStream).mkString)
     })
     response
   }
 
   def getWeather = {
+    //current
+    val weatherFieldsC = Seq("summary", "temperature", "apparentTemperature", "humidity", "precipProbability")
+    //hourly
+    val weatherFieldsH = Seq("summary", "temperature", "apparentTemperature", "humidity", "precipProbability")
+    //daily
+    val weatherFieldsD = Seq("summary", "temperature", "apparentTemperature", "humidity", "precipProbability", "temperatureHigh", "temperatureLow")
     val body = getApi.body
     val currentTempQ = 'currently / 'apparentTemperature
     val currentTemp = body.extract[Float](currentTempQ)
     currentTemp
   }
+  // element(0) in query gives the first element in json array
+  // ex body.extract[JsValue]('daily / 'data / element(0))
+  // OR return Vector(JsValue)
+  // ex body.extract[JsValue]('daily / 'data / *)
 
 
 

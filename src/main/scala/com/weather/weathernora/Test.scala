@@ -32,7 +32,7 @@ class Test {
     response
   }
 
-  def getWeather(type: String) = {
+  def getWeather(what: String) = {
     val body = getApi.body
 
     /*
@@ -48,6 +48,8 @@ class Test {
     val attributes = wtype.attributes
 
     // need to figure out how we can query the array's for day/hourly easy
+    // read them as a sequence body.export[Seq[JsValue]]('hourly / 'data)
+    // two different methods ?
     queryResults = attributes.map{ case(s: String) => {
       if (interval == "currently") {
         query = '${interval} / '${s}
@@ -74,6 +76,7 @@ class Test {
   //val responseFuture: Future[HttpResponse] = {
   //  Http().singleRequest(HttpRequest(uri = "https://akka.io"))
   //}
+  }
 
   def main(args: Array[String]): Unit = {
   implicit val system = ActorSystem()

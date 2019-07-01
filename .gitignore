@@ -1,8 +1,8 @@
 *.class
 *.log
-src/*/target/
-src/*/bin/
-src/*/project/
+target/
+bin/
+project/
 *.cache
 *.classpath
 *.project

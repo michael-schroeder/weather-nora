@@ -32,11 +32,28 @@ class Test {
     response
   }
 
-  def getWeather(what: String) = {
+  //email is justahoneyfox@gmail.com
+
+  // need to add print statments or something... oh wait email lol
+  def getCurrentWeather = {
+    val weatherCurr = weatherType("currently", Seq("summary", "temperature", "apparentTemperature", "humidity", "precipProbability"))
     val body = getApi.body
 
+    val attributes = weatherCurr.attributes
+
+    val query = '${weatherCurr.interval} / '${weatherCurr.attributes}
+    val queryResults = attributes.map{ value => {
+      query = '${weatherCurr.interval} / '${value}
+      body.extract[Float](query)
+    }}
+    queryResults
+  }
+  
+  def getMultiWeather(type: String) = {
+  }
+  
+
     /*
-    val weatherCurr = weatherType("currently", Seq("summary", "temperature", "apparentTemperature", "humidity", "precipProbability"))
     val weatherHour = weatherType("hourly", Seq("summary", "temperature", "apparentTemperature", "humidity", "precipProbability"))
     val weatherDaily = weatherType("daily", Seq("summary", "temperature", "apparentTemperature", "humidity", "precipProbability", "temperatureHigh", "temperatureLow"))
     val weatherMap = Map("current" -> weatherCurr, "hour" -> weatherHour, "day" -> weatherDaily)

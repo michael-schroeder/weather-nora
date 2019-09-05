@@ -32,7 +32,7 @@ class Test {
     response
   }
 
-  //email is justahoneyfox@gmail.com
+  // email is justahoneyfox@gmail.com
 
   // need to add print statments or something... oh wait email lol
   def getCurrentWeather = {
@@ -48,10 +48,10 @@ class Test {
     }}
     queryResults
   }
-  
+
   def getMultiWeather(type: String) = {
   }
-  
+
 
     /*
     val weatherHour = weatherType("hourly", Seq("summary", "temperature", "apparentTemperature", "humidity", "precipProbability"))
@@ -65,8 +65,10 @@ class Test {
     val attributes = wtype.attributes
 
     // need to figure out how we can query the array's for day/hourly easy
-    // read them as a sequence body.export[Seq[JsValue]]('hourly / 'data)
-    // two different methods ?
+    // element(0) in query gives the first element in json array
+    // ex body.extract[JsValue]('daily / 'data / element(0))
+    // OR return Vector(JsValue)
+    // ex body.extract[JsValue]('daily / 'data / *)
     queryResults = attributes.map{ case(s: String) => {
       if (interval == "currently") {
         query = '${interval} / '${s}
@@ -83,12 +85,6 @@ class Test {
     currentTemp
   }
   */
-  // element(0) in query gives the first element in json array
-  // ex body.extract[JsValue]('daily / 'data / element(0))
-  // OR return Vector(JsValue)
-  // ex body.extract[JsValue]('daily / 'data / *)
-
-
 
   //val responseFuture: Future[HttpResponse] = {
   //  Http().singleRequest(HttpRequest(uri = "https://akka.io"))
